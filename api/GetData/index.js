@@ -1,6 +1,6 @@
 module.exports = async function (context, req) {
     context.log('Sending data from server');
-/*
+
     // Read parking-data
     const reader = new FileReader();
     let data;
@@ -10,10 +10,10 @@ module.exports = async function (context, req) {
     }
 
     reader.readAsText('parking-data.json')
-*/
+
     context.res = {
         // status: 200, /* Defaults to 200 */
-        body: {data: 'hello'},
+        body: data,
         header: { 'Content-Type': 'application/json' }
     };
 }
