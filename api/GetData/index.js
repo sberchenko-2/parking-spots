@@ -3,21 +3,9 @@ module.exports = async function (context, req) {
 
     // Read parking-data
     const reader = new FileReader();
-    let data;
 
-    try {
-      reader.onload = function() {
-        data = JSON.parse(reader.result);
-      }
-
-      reader.readAsText('parking-data.json')
-      console.log(data)
-    }
-    catch(err) {
-      console.log("Error")
-      console.log(err)
-    }
-
+    const response = await fetch('parking-data.json');
+    const data = await response.json();
 
     context.res = {
         // status: 200, /* Defaults to 200 */
