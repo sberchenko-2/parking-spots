@@ -10,6 +10,7 @@ module.exports = async function (context, req) {
     }
 
     reader.readAsText('parking-data.json')
+    console.log(data)
 
     context.res = {
         // status: 200, /* Defaults to 200 */
