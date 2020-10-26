@@ -2,8 +2,10 @@ module.exports = async function (context, req) {
     context.log('Sending data from server');
 
     // Read parking-data
-    //const response = await fetch('parking-data.json');
-    //const data = await response.json();
+    const response = await fetch('parking-data.json');
+    const data = await response.json();
+
+    console.log(data)
 
     const parking_data = [
         { name: 'Azure' },
