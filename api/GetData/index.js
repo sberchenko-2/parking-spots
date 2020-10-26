@@ -5,7 +5,11 @@ module.exports = async function (context, req) {
     //const response = await fetch('parking-data.json');
     //const data = await response.json();
 
-    const data = "Testing data"
+    const data = [
+        { name: 'Azure' },
+        { name: 'Sammy' },
+        { name: 'Roscoe' },
+    ];
     context.res = {
         // status: 200, /* Defaults to 200 */
         body: data,
