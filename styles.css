@@ -1,0 +1,112 @@
+p {
+  margin: 5pt 0;
+}
+
+.flex-container {
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  font-size: 18pt;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #122142;
+  font-size: 20pt;
+  font-weight: bold;
+  color: #122142;
+  width: 325px;
+}
+
+#header > img {
+  height: 29pt;
+  margin: auto 5px;
+}
+
+#info-container {
+  padding: 0 0;
+}
+
+#info-top {
+  display: flex;
+  flex-direction: row;
+}
+
+#info-top > p {
+  margin-right: 15px;
+}
+
+#info-top > button {
+  margin: auto 0;
+  font-size: 18pt;
+}
+
+#selectors {
+  font-size: 16pt;
+}
+
+#selectors > select {
+  font-size: 12pt;
+  margin-right: 25px;
+}
+
+#selectors > label {
+  display: inline;
+  font-size: 14pt;
+}
+
+#availability-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+#availability-container > table {
+  margin-right: 25px;
+  overflow: scroll;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  font-size: 14pt;
+}
+
+.unavailable-slot {
+  background: red;
+}
+
+.available-slot {
+  background: green;
+  cursor: pointer;
+}
+
+#slot-booking {
+  border: 2px solid black;
+  padding: 5px;
+  width: 310px;
+  height: 200px;
+}
+
+#slot-booking > h5 {
+  margin: 0;
+}
+
+#slot-booking > p {
+  font-size: 14pt;
+}
+
+#booking-repeat > label {
+  font-size: 14pt;
+}
+
+#name-booking > label {
+  font-size: 14pt;
+  float: left;
+  margin: 5px 5px 0 0;
+}

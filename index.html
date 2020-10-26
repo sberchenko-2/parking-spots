@@ -13,7 +13,83 @@
 <body>
 
 <div class="flex-container">
-  <p id="parking-data"></p>
+  <div id="header-container" class="flex-container">
+    <div id="header">
+      <img src="./iii_logo.png" alt="Itasca Consulting Logo" />
+      <p><em>Parking Scheduler</em></p>
+    </div>
+  </div>
+  <div id="content" class="flex-container">
+    <div id="info-container" class="flex-container">
+      <div id="info-top">
+        <p id="date">October 26 - November 1</p>
+        <button id="back_button" onclick="change_time(-7)"><</button>
+        <button id="forward_button" onclick="change_time(7)">></button>
+      </div>
+      <div id="selectors">
+        <label for="location-selector" style="font-size: 16pt">Location: </label>
+        <select id="location-selector" onchange="display_data()">
+          <option value="any">Any</option>
+          <option value="underground">Underground</option>
+          <option value="aboveground">Above Ground</option>
+        </select>
+        <label style="font-size: 16pt">Availability:</label>
+        <input type="checkbox" id="monday" value="monday" onchange="display_data()">
+        <label for="monday">M</label>
+        <input type="checkbox" id="tuesday" value="tuesday" onchange="display_data()">
+        <label for="tuesday">Tu</label>
+        <input type="checkbox" id="wednesday" value="wednesday" onchange="display_data()">
+        <label for="wednesday">W</label>
+        <input type="checkbox" id="thursday" value="thursday" onchange="display_data()">
+        <label for="thursday">Th</label>
+        <input type="checkbox" id="friday" value="friday" onchange="display_data()">
+        <label for="friday">F</label>
+        <input type="checkbox" id="saturday" value="saturday" onchange="display_data()">
+        <label for="saturday">Sa</label>
+        <input type="checkbox" id="sunday" value="sunday" onchange="display_data()">
+        <label for="sunday">Su</label>
+      </div>
+    </div>
+    <div id="availability-container">
+      <table id="availability-table">
+        <tr>
+          <th>Space</th>
+          <th>Mo</th>
+          <th>Tu</th>
+          <th>We</th>
+          <th>Th</th>
+          <th>Fr</th>
+          <th>Sa</th>
+          <th>Su</th>
+        </tr>
+      </table>
+      <div id="slot-booking">
+        <h5>Slot Booking</h5>
+        <p id="selected-slot">Selected Slot: None</p>
+        <p id="selected-days">Selected Days: None</p>
+        <p id="slot-location">Slot Location: N/A</p>
+        <div id="booking-repeat">
+          <input type="checkbox" id="repeat">
+          <label for="repeat">Repeat Booking</label>
+          <select id="repeat_limit">
+            <option value="2_weeks">2 Weeks</option>
+            <option value="1_month">1 Month</option>
+            <option value="2_months">2 Months</option>
+            <option value="indefinitely">Indefinitely</option>
+          </select>
+        </div>
+        <div id="name-booking">
+          <input id="name-input">
+          <label for="name-input">Name</label>
+        </div>
+        <div id="booking-buttons">
+          <button onclick="confirm_booking()">Confirm</button>
+          <button onclick="cancel_booking()">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="local-index.js"></script>
