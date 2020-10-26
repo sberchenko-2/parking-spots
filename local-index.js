@@ -8,7 +8,7 @@ async function main() {
 }
 
 async function load_data() {
-    const response = await fetch('/api/GetData');
+    const response = await fetch('/api2/GetData');
     const json = await response.json();
     console.log(json);
     parking_data = json.data;
