@@ -3,18 +3,12 @@ module.exports = async function (context, req) {
 
     // Read parking-data
     const response = await fetch('parking-data.json');
-    const data = await response.json();
+    const parking_data = await response.json();
 
-    console.log(data)
-
-    const parking_data = [
-        { name: 'Azure' },
-        { name: 'Sammy' },
-        { name: 'Roscoe' },
-    ];
+    console.log(parking_data)
 
     context.res = {
-        // status: 200, /* Defaults to 200 */
+        status: 200,
         body: {data: parking_data},
         header: { 'Content-Type': 'application/json' }
     };
