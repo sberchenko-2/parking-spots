@@ -5,9 +5,13 @@ module.exports = async function (context, req) {
     //const response = await fetch('parking-data.json');
     //const parking_data = await response.json();
 
+    const parking_data = [
+        { url: document.URL}
+    ]
+
     context.res = {
         // status: 200,
-        body: {data: window.location.href},
+        body: {data: parking_data},
         header: { 'Content-Type': 'application/json' }
     };
 }
