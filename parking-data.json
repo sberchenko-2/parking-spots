@@ -1,7 +1,14 @@
 {
-  "Slot 1": {
-    "10/25": "None",
-    "10/26": "Jeff",
-    "10/27": "None"
-  }
+  "Slots": [
+    {"slot_num": "62", "location": "aboveground", "availability": ["None", "None", "Howie", "None", "None", "None", "None"]},
+    {"slot_num": "63", "location": "aboveground", "availability": ["None", "None", "None", "None", "None", "None", "None"]},
+    {"slot_num": "032", "location": "aboveground", "availability": ["None", "None", "None", "None", "None", "None", "None"]},
+    {"slot_num": "146", "location": "underground", "availability": ["None", "None", "None", "None", "None", "None", "None"]},
+    {"slot_num": "148", "location": "underground", "availability": ["Derrick", "None", "None", "None", "None", "None", "None"]},
+    {"slot_num": "005", "location": "underground", "availability": ["None", "Natalia", "Natalia", "None", "None", "None", "None"]},
+    {"slot_num": "008", "location": "underground", "availability": ["None", "None", "None", "None", "None", "None", "None"]},
+    {"slot_num": "004", "location": "underground", "availability": ["None", "Andrey", "None", "Andrey", "Andrey", "None", "None"]},
+    {"slot_num": "44", "location": "underground", "availability": ["None", "Judy", "Judy", "Judy", "None", "None", "None"]},
+    {"slot_num": "49", "location": "underground", "availability": ["None", "Ryan", "Maurilio", "None", "Ryan", "None", "None"]}
+  ]
 }
