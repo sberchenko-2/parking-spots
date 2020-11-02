@@ -18,11 +18,18 @@ const months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6
 main();
 
 async function main() {
-  //await load_data();
+  /**
+   * Loads and displays initial state of parking
+   */
+  await load_data();
   display_data();
 }
 
 async function load_data() {
+  /**
+   * Loads in initial data from Azure function
+   * @type {Response}
+   */
   const response = await fetch('/api2/GetData');
   const json = await response.json();
   console.log(json);
