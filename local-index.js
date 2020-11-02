@@ -1,16 +1,5 @@
 let parking_data;
 
-parking_data = [{slot_num: "62", location: "aboveground", availability: ["None", "None", "Howie", "None", "None", "None", "None"]},
-                {slot_num: "63", location: "aboveground", availability: ["None", "None", "None", "None", "None", "None", "None"]},
-                {slot_num: "032", location: "aboveground", availability: ["None", "None", "None", "None", "None", "None", "None"]},
-                {slot_num: "146", location: "underground", availability: ["None", "None", "None", "None", "None", "None", "None"]},
-                {slot_num: "148", location: "underground", availability: ["Derrick", "None", "None", "None", "None", "None", "None"]},
-                {slot_num: "005", location: "underground", availability: ["None", "Natalia", "Natalia", "None", "None", "None", "None"]},
-                {slot_num: "008", location: "underground", availability: ["None", "None", "None", "None", "None", "None", "None"]},
-                {slot_num: "004", location: "underground", availability: ["None", "Andrey", "None", "Andrey", "Andrey", "None", "None"]},
-                {slot_num: "44", location: "underground", availability: ["None", "Judy", "Judy", "Judy", "None", "None", "None"]},
-                {slot_num: "49", location: "underground", availability: ["None", "Ryan", "Maurilio", "None", "Ryan", "None", "None"]},]
-
 const days = ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'];
 const months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July',
                 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'};
@@ -21,10 +10,9 @@ async function main() {
   /**
    * Loads and displays initial state of parking
    */
-  console.log('in main')
   await load_data();
+  console.log(parking_data)
   display_data();
-  console.log('main completed')
 }
 
 async function load_data() {
@@ -32,19 +20,11 @@ async function load_data() {
    * Loads in initial data from Azure function
    * @type {Response}
    */
-  console.log('in load_data')
   const response = await fetch('parking-data.json');
-  console.log('response fetched')
-  console.log(response)
-  const json = await response.json();
-  console.log('response converted to json')
-  console.log(json);
-  parking_data = json.data;
-  console.log(parking_data)
+  parking_data = await response.json();
 }
 
 function display_data() {
-  console.log('in display_data')
   let table = document.getElementById("availability-table")
 
   // remove old data
