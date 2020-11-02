@@ -21,8 +21,10 @@ async function main() {
   /**
    * Loads and displays initial state of parking
    */
+  console.log('in main')
   await load_data();
   display_data();
+  console.log('main completed')
 }
 
 async function load_data() {
@@ -30,16 +32,19 @@ async function load_data() {
    * Loads in initial data from Azure function
    * @type {Response}
    */
+  console.log('in load_data')
   const response = await fetch('/api2/GetData');
+  console.log('response fetched')
+  console.log(response)
   const json = await response.json();
+  console.log('response converted to json')
   console.log(json);
   parking_data = json.data;
   console.log(parking_data)
-
-  display_data()
 }
 
 function display_data() {
+  console.log('in display_data')
   let table = document.getElementById("availability-table")
 
   // remove old data
