@@ -1,5 +1,5 @@
 {
-  "Slots": [
+  "slots": [
     {"slot_num": "62", "location": "aboveground", "availability": ["None", "None", "Howie", "None", "None", "None", "None"]},
     {"slot_num": "63", "location": "aboveground", "availability": ["None", "None", "None", "None", "None", "None", "None"]},
     {"slot_num": "032", "location": "aboveground", "availability": ["None", "None", "None", "None", "None", "None", "None"]},

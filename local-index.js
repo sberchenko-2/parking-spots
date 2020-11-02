@@ -22,6 +22,7 @@ async function load_data() {
    */
   const response = await fetch('parking-data.json');
   parking_data = await response.json();
+  parking_data = parking_data.slots;
 }
 
 function display_data() {
