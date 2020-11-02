@@ -33,7 +33,7 @@ async function load_data() {
    * @type {Response}
    */
   console.log('in load_data')
-  const response = await fetch('/api2/GetData');
+  const response = await fetch('/api/GetData');
   console.log('response fetched')
   console.log(response)
   const json = await response.json();
