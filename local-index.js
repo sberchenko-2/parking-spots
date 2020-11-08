@@ -11,7 +11,6 @@ async function main() {
    * Loads and displays initial state of parking
    */
   await load_data();
-  console.log(parking_data)
   display_data();
 }
 
@@ -20,7 +19,8 @@ async function load_data() {
    * Loads in initial data from Azure function
    * @type {Response}
    */
-  const response = await fetch('parking-data.json');
+  const response = await fetch('/api/GetData');
+  console.log(response)
   parking_data = await response.json();
   parking_data = parking_data.slots;
 }
