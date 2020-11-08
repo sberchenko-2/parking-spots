@@ -41,7 +41,6 @@ def modify_data(name, slot_num, dates):
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Modifying data')
 
     name, slot_num, dates = get_params(req)
 
