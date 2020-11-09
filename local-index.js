@@ -144,7 +144,7 @@ function cell_clicked(cell, slot_num, slot_location, i) {
 async function confirm_booking() {
   let name = document.getElementById('name-input').value;
   let repeat = document.getElementById('repeat_limit').value;
-  let slot = document.getElementById('selected-slot').textContent.substring(15);
+  let slot = document.getElementById('selected-slot').textContent.substring(16);
 
   if (!document.getElementById('repeat').checked) {
     repeat = 0;
@@ -176,8 +176,8 @@ async function confirm_booking() {
     selections[4] = 1;
   }
 
-  let fetch_str = 'api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=' + selections +
-    '&repeat=' + repeat + "&curr_week=" + curr_week;
+  let fetch_str = 'api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=[' + selections +
+    ']&repeat=' + repeat + "&curr_week=" + curr_week;
   console.log(fetch_str);
 
   let response = await fetch(fetch_str);

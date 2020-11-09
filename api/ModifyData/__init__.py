@@ -59,15 +59,30 @@ def modify_data(name, slot_num, days, repeat, curr_week):
         for line in f.readlines():
             data += line
 
-    data = json.loads(data)
+    # Locate slot data in overall JSON
+    data = json.loads(data)['slots']
+    index = -1
+    for i, arr in enumerate(data):
+        if arr['slot_num'] == slot_num:
+            index = i
+            break
 
+    # Add in new data
+    for i, e in enumerate(days):
+        if e == 1:
+            data[index]['availability'][curr_week][i] = name
+            data[index]['recurring'][curr_week][i] = repeat
+
+    # Write new data to file
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
     name, slot_num, days, repeat, curr_week = get_params(req)
+    with open('temp.txt', 'w') as f:
+        f.write(f'name={name}\nslot_num={slot_num}\ndays={days}\nrepeat={repeat}\ncurr_week={curr_week}')
 
-    if name and slot_num and days and repeat:
+    if name and slot_num and days and repeat and curr_week:
         modify_data(name, slot_num, days)
         return func.HttpResponse("This HTTP triggered function executed successfully." +
                                  "name=" + name + "; slot_num=" + slot_num + "; days=" + days +
