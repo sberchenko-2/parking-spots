@@ -24,6 +24,7 @@ async function load_data() {
   console.log(response)
   parking_data = await response.json();
   parking_data = parking_data.slots;
+  console.log(parking_data);
 }
 
 function display_data() {
