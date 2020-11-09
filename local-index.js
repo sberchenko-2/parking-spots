@@ -176,10 +176,11 @@ async function confirm_booking() {
     selections[4] = 1;
   }
 
-  console.log(selections)
+  let fetch_str = 'api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=' + selections +
+    '&repeat=' + repeat + "&curr_week=" + curr_week;
+  console.log(fetch_str);
 
-  let response = await fetch('api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=' + selections +
-    '&repeat=' + repeat + "&curr_week=" + curr_week);
+  let response = await fetch(fetch_str);
   console.log(response);
 
   cancel_booking();
