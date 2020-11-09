@@ -143,7 +143,20 @@ function cell_clicked(cell, slot_num, slot_location, i) {
 }
 
 function confirm_booking() {
-  console.log('booking confirmed');
+  let name = document.getElementById('name-input').textContent;
+  let repeat = document.getElementById('repeat_limit').value;
+  let slot = document.getElementById('selected-slot').textContent.substring(15);
+
+  if (slot === 'None') {
+    console.log('no slot selected');
+  } else if (name === '') {
+    console.log('no name selected')
+  }
+
+  let days = document.getElementById('selected-days').textContent.substring(15);
+  days = days.split(', ');
+  console.log(days);
+
   cancel_booking();
 }
 
