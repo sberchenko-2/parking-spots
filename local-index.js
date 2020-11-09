@@ -24,7 +24,6 @@ async function load_data() {
   console.log(response)
   parking_data = await response.json();
   parking_data = parking_data.slots;
-  console.log(parking_data);
 }
 
 function display_data() {
@@ -143,10 +142,14 @@ function cell_clicked(cell, slot_num, slot_location, i) {
   document.getElementById('slot-location').textContent = "Slot Location: " + new_location;
 }
 
-function confirm_booking() {
+async function confirm_booking() {
   let name = document.getElementById('name-input').textContent;
   let repeat = document.getElementById('repeat_limit').value;
   let slot = document.getElementById('selected-slot').textContent.substring(15);
+
+  if (!document.getElementById('repeat').checked) {
+    repeat = 0;
+  }
 
   if (slot === 'None') {
     console.log('no slot selected');
@@ -155,8 +158,30 @@ function confirm_booking() {
   }
 
   let days = document.getElementById('selected-days').textContent.substring(15);
-  days = days.split(', ');
-  console.log(days);
+
+  // Processes days into array of 0s and 1s
+  let selections = [0, 0, 0, 0, 0];
+  if (days.search('M') !== -1) {
+    selections[0] = 1;
+  }
+  if (days.search('Tu') !== -1) {
+    selections[1] = 1;
+  }
+  if (days.search('W') !== -1) {
+    selections[2] = 1;
+  }
+  if (days.search('Th') !== -1) {
+    selections[3] = 1;
+  }
+  if (days.search('F') !== -1) {
+    selections[4] = 1;
+  }
+
+  console.log(selections)
+
+  let response = await fetch('api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=' + selections +
+    '&repeat=' + repeat);
+  console.log(response);
 
   cancel_booking();
 }

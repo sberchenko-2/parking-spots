@@ -23,30 +23,41 @@ def get_params(req):
         else:
             slot_num = req_body.get('slot_num')
 
-    dates = req.params.get('dates')
-    if not dates:
+    days = req.params.get('days')
+    if not days:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            dates = req_body.get('dates')
+            dates = req_body.get('days')
+
+    repeat = req.params.get('repeat')
+    if not repeat:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            dates = req_body.get('repeat')
     
-    return name, slot_num, dates
+    return name, slot_num, days, repeat
 
 
-def modify_data(name, slot_num, dates):
+def modify_data(name, slot_num, days, repeat):
     # Modifies the data
     print('Not implemented')
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
-    name, slot_num, dates = get_params(req)
+    name, slot_num, days, repeat = get_params(req)
 
-    if name and slot_num and dates:
-        modify_data(name, slot_num, dates)
-        return func.HttpResponse("This HTTP triggered function executed successfully.")
+    if name and slot_num and days and repeat:
+        modify_data(name, slot_num, days)
+        return func.HttpResponse("This HTTP triggered function executed successfully." +
+                                 "name=" + name + "; slot_num=" + slot_num + "; days=" + days +
+                                 "; repeat=" + repeat)
     else:
         return func.HttpResponse(
              "Invalid / missing parameter passed (name, slot_num, dates)",
