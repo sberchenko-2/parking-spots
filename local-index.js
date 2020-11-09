@@ -70,7 +70,7 @@ function display_data() {
     let row = table.insertRow(-1);
     row.insertCell(0).innerHTML = "Slot " + slot_num;
 
-    for (let i = 0; i < required_days.length; i++) {
+    for (let i = 0; i < 5; i++) {
       let cell = row.insertCell(-1);
       cell.className = availability[i] !== "None" ? "unavailable-slot" : "available-slot";
       cell.id = slot_num + "_" + i;
