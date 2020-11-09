@@ -21,7 +21,6 @@ async function load_data() {
    * @type {Response}
    */
   const response = await fetch('/api/GetData');
-  console.log(response)
   parking_data = await response.json();
   parking_data = parking_data.slots;
 }
@@ -143,7 +142,7 @@ function cell_clicked(cell, slot_num, slot_location, i) {
 }
 
 async function confirm_booking() {
-  let name = document.getElementById('name-input').textContent;
+  let name = document.getElementById('name-input').value;
   let repeat = document.getElementById('repeat_limit').value;
   let slot = document.getElementById('selected-slot').textContent.substring(15);
 
@@ -180,7 +179,7 @@ async function confirm_booking() {
   console.log(selections)
 
   let response = await fetch('api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=' + selections +
-    '&repeat=' + repeat);
+    '&repeat=' + repeat + "&curr_week=" + curr_week);
   console.log(response);
 
   cancel_booking();
