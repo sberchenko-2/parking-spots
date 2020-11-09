@@ -1,5 +1,4 @@
-import logging
-
+import json
 import azure.functions as func
 
 
@@ -40,18 +39,33 @@ def get_params(req):
             pass
         else:
             dates = req_body.get('repeat')
+
+    curr_week = req.params.get('curr_week')
+    if not curr_week:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            dates = req_body.get('curr_week')
     
-    return name, slot_num, days, repeat
+    return name, slot_num, days, repeat, curr_week
 
 
-def modify_data(name, slot_num, days, repeat):
-    # Modifies the data
-    print('Not implemented')
+def modify_data(name, slot_num, days, repeat, curr_week):
+    # Read in parking data
+    data = ''
+    with open('parking-data.json', 'r') as f:
+        for line in f.readlines():
+            data += line
+
+    data = json.loads(data)
+
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
-    name, slot_num, days, repeat = get_params(req)
+    name, slot_num, days, repeat, curr_week = get_params(req)
 
     if name and slot_num and days and repeat:
         modify_data(name, slot_num, days)
