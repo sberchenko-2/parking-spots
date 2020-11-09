@@ -1,6 +1,7 @@
 let parking_data;
+let curr_week = 0;  // Current week in month
 
-const days = ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'];
+const days = ['M', 'Tu', 'W', 'Th', 'F'];
 const months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July',
                 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'};
 
@@ -40,16 +41,15 @@ function display_data() {
                        document.getElementById("tuesday").checked,
                        document.getElementById("wednesday").checked,
                        document.getElementById("thursday").checked,
-                       document.getElementById("friday").checked,
-                       document.getElementById("saturday").checked,
-                       document.getElementById("sunday").checked,]
+                       document.getElementById("friday").checked];
   required_days = required_days.reduce((out, bool, i) => bool ? out.concat(i) : out, [])
 
   for (let k = 0; k < parking_data.length; k++) {
     let slot_data = parking_data[k];
     let slot_num = slot_data.slot_num;
     let slot_location = slot_data.location;
-    let availability = slot_data.availability;
+    let availability = slot_data.availability[curr_week];
+    let recurring = slot_data.recurring[curr_week];
 
     // Check slot meets search parameters
     if (location !== "any" && location !== slot_location) {
@@ -166,6 +166,14 @@ function cancel_booking() {
 }
 
 function change_time(days_change) {
+  if (curr_week === 4) {
+    document.getElementById('forward_button').disabled = false;
+  } else if (curr_week === 0) {
+    document.getElementById('back_button').disabled = false;
+  }
+
+  curr_week += days_change / 7
+
   let curr_date = document.getElementById('date').textContent;
   let lower_date = curr_date.substring(0, curr_date.indexOf(' - '));
   lower_date = new Date(lower_date);
@@ -178,4 +186,10 @@ function change_time(days_change) {
   lower_date = months[lower_date.getMonth() + 1] + ' ' + lower_date.getDate();
   upper_date = months[upper_date.getMonth() + 1] + ' ' + upper_date.getDate();
   document.getElementById('date').textContent = lower_date + ' - ' + upper_date;
+
+  if (curr_week === 4) {
+    document.getElementById('forward_button').disabled = true;
+  } else if (curr_week === 0) {
+    document.getElementById('back_button').disabled = true;
+  }
 }

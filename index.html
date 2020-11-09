@@ -23,7 +23,7 @@
     <div id="info-container" class="flex-container">
       <div id="info-top">
         <p id="date">October 26 - November 1</p>
-        <button id="back_button" onclick="change_time(-7)"><</button>
+        <button id="back_button" onclick="change_time(-7)" disabled="true"><</button>
         <button id="forward_button" onclick="change_time(7)">></button>
       </div>
       <div id="selectors">
@@ -44,10 +44,6 @@
         <label for="thursday">Th</label>
         <input type="checkbox" id="friday" value="friday" onchange="display_data()">
         <label for="friday">F</label>
-        <input type="checkbox" id="saturday" value="saturday" onchange="display_data()">
-        <label for="saturday">Sa</label>
-        <input type="checkbox" id="sunday" value="sunday" onchange="display_data()">
-        <label for="sunday">Su</label>
       </div>
     </div>
     <div id="availability-container">
