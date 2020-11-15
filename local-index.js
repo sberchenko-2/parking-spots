@@ -204,7 +204,7 @@ function cancel_booking() {
 }
 
 function change_time(days_change) {
-  if (curr_week === 4) {
+  if (curr_week === 3) {
     document.getElementById('forward_button').disabled = false;
   } else if (curr_week === 0) {
     document.getElementById('back_button').disabled = false;
@@ -225,7 +225,7 @@ function change_time(days_change) {
   upper_date = months[upper_date.getMonth() + 1] + ' ' + upper_date.getDate();
   document.getElementById('date').textContent = lower_date + ' - ' + upper_date;
 
-  if (curr_week === 4) {
+  if (curr_week === 3) {
     document.getElementById('forward_button').disabled = true;
   } else if (curr_week === 0) {
     document.getElementById('back_button').disabled = true;
