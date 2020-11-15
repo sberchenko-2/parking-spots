@@ -58,22 +58,38 @@ def modify_data(name, slot_num, days, repeat, curr_week):
     ))
     item = items[0]
 
-    for e, i in enumerate(days):
-        if e == 1:
+    # Change availability and recurring where days indicates
+    for i, e in enumerate(days):
+        if e == '1':
             item['availability'][curr_week][i] = name
             item['recurring'][curr_week][i] = repeat
 
     container.replace_item(item=item, body=item)
 
 
+def process_inputs(name, slot_num, days, repeat, curr_week):
+    """
+    Processes the inputs and returns the new values.
+    """
+    # Process days
+    days = days[1:-1].split(',')
+
+    # Process repeat & curr_week
+    repeat = int(repeat)
+    curr_week = int(curr_week)
+
+    return name, slot_num, days, repeat, curr_week
+
+
 def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage]) -> str:
 
     name, slot_num, days, repeat, curr_week = get_params(req)
 
-    if name and slot_num and days and repeat and curr_week:
-        modify_data(name, slot_num, days, repeat, curr_week)
-        return func.HttpResponse("This HTTP triggered function executed successfully.")
-    else:
+    if not (name and slot_num and days and repeat and curr_week):
         response = f'Missing parameters: \nname = {name}\nslot_num = {slot_num}\ndays = {days}\n' + \
                    f'repeat = {repeat}\ncurr_week = {curr_week}'
         return func.HttpResponse(response, status_code=500)
+
+    name, slot_num, days, repeat, curr_week = process_inputs(name, slot_num, days, repeat, curr_week)
+    modify_data(name, slot_num, days, repeat, curr_week)
+    return func.HttpResponse("This HTTP triggered function executed successfully.")
