@@ -179,7 +179,7 @@ async function confirm_booking() {
     '&name=' + name + '&slot_num=' + slot + '&days=[' + selections +
     ']&repeat=' + repeat + "&curr_week=" + curr_week;
 
-  let response = await fetch(fetch_str);
+  await fetch(fetch_str);
   cancel_booking();
   await load_data();
   display_data();
@@ -224,6 +224,8 @@ function change_time(days_change) {
   lower_date = months[lower_date.getMonth() + 1] + ' ' + lower_date.getDate();
   upper_date = months[upper_date.getMonth() + 1] + ' ' + upper_date.getDate();
   document.getElementById('date').textContent = lower_date + ' - ' + upper_date;
+
+  display_data()
 
   if (curr_week === 3) {
     document.getElementById('forward_button').disabled = true;
