@@ -176,7 +176,8 @@ async function confirm_booking() {
     selections[4] = 1;
   }
 
-  let fetch_str = 'api/ModifyData?name=' + name + '&slot_num=' + slot + '&days=[' + selections +
+  let fetch_str = 'https://parking-spots-functions.azurewebsites.net/api/modifydata?code=MoFDbgXluYzoOWLiIUw7XyKZt0Fab4DsO6fj81NQb1Eq8zjG2z76ZA==' +
+    '&name=' + name + '&slot_num=' + slot + '&days=[' + selections +
     ']&repeat=' + repeat + "&curr_week=" + curr_week;
   console.log(fetch_str);
 
