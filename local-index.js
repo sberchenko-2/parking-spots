@@ -201,6 +201,9 @@ function cancel_booking() {
   document.getElementById('selected-slot').textContent = "Selected Slot: None";
   document.getElementById('selected-days').textContent = "Selected Days: None";
   document.getElementById('slot-location').textContent = "Slot Location: N/A";
+  document.getElementById('name-input').textContent = '';
+  document.getElementById('repeat').checked = false;
+  document.getElementById('repeat_limit').selectedIndex = 0;
 }
 
 function change_time(days_change) {
@@ -226,6 +229,7 @@ function change_time(days_change) {
   document.getElementById('date').textContent = lower_date + ' - ' + upper_date;
 
   display_data()
+  cancel_booking()
 
   if (curr_week === 3) {
     document.getElementById('forward_button').disabled = true;
