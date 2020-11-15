@@ -58,11 +58,22 @@ def modify_data(name, slot_num, days, repeat, curr_week):
     ))
     item = items[0]
 
+    # Calculate maximum week of booking and relevant repeat
+    max_week = curr_week + repeat
+    if repeat == -1:
+        max_week = 3
+    elif max_week > 3:
+        max_week = 3
+        repeat -= 3 - curr_week
+    else:
+        repeat = 0
+
     # Change availability and recurring where days indicates
     for i, e in enumerate(days):
         if e == '1':
-            item['availability'][curr_week][i] = name
-            item['recurring'][curr_week][i] = repeat
+            for week in range(curr_week, max_week):
+                item['availability'][week][i] = name
+                item['recurring'][week][i] = repeat if week == max_week else 0
 
     container.replace_item(item=item, body=item)
 
