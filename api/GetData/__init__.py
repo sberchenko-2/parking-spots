@@ -22,7 +22,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         offer_throughput=400
     )
 
-    item = container.read_item(item='d1be1338-c8d6-420a-a379-1e3bfecc1c68',
-                               partition_key='d1be1338-c8d6-420a-a379-1e3bfecc1c68')
+    # Query slots using SQL
+    query = "SELECT * FROM c"
 
-    return func.HttpResponse(json.dumps(item))
+    items = list(container.query_items(
+        query=query,
+        enable_cross_partition_query=True
+    ))
+
+    return func.HttpResponse(json.dumps(items))
