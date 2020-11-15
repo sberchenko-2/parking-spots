@@ -1,5 +1,6 @@
 import azure.functions as func
-from azure.cosmos import exceptions, CosmosClient, PartitionKey
+from azure.cosmos import CosmosClient, PartitionKey
+import json
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -29,4 +30,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         enable_cross_partition_query=True
     ))
 
-    return func.HttpResponse(items[0])
+    return func.HttpResponse(json.dumps(items[0]))
