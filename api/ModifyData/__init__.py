@@ -1,94 +1,74 @@
-import json
 import azure.functions as func
+from azure.cosmos import CosmosClient, PartitionKey
+import json
 
 
 def get_params(req):
-    # Get data-modifying parameters
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
+    """
+    Returns parameters in req input.
+    This function simply returns the values of the raw parameters - no data verification is
+        performed.
+    :param req: HTTP trigger input
+    :return: Values for 'name', 'slot_num', 'days', 'repeat', 'curr_week'
+    """
+    return req.params.get('name'), req.params.get('slot_num'), req.params.get('days'), \
+           req.params.get('repeat'), req.params.get('curr_week')
 
-    slot_num = req.params.get('slot_num')
-    if not slot_num:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            slot_num = req_body.get('slot_num')
 
-    days = req.params.get('days')
-    if not days:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            dates = req_body.get('days')
+def get_cosmos_connectivities():
+    """
+    Returns the Cosmos DB container associated with the parking data
+    """
+    endpoint = "https://parking-spots.documents.azure.com:443/"
+    key = 'c9av0FP6xBrnz7XNUdBNIUFdCuo1IvE3H2SWvvB8Pxo92ALKzfW2gDXxgQlBlyUJtLDiJSZK6Ew8YO8yPNepnA=='
+    client = CosmosClient(endpoint, key)
 
-    repeat = req.params.get('repeat')
-    if not repeat:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            dates = req_body.get('repeat')
+    # Select database
+    database_name = 'Parking-Data'
+    database = client.create_database_if_not_exists(id=database_name)
 
-    curr_week = req.params.get('curr_week')
-    if not curr_week:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            dates = req_body.get('curr_week')
-    
-    return name, slot_num, days, repeat, curr_week
+    # Select container
+    container_name = 'Items'
+    container = database.create_container_if_not_exists(
+        id=container_name,
+        partition_key=PartitionKey(path="/slots"),
+        offer_throughput=400
+    )
+
+    return container
 
 
 def modify_data(name, slot_num, days, repeat, curr_week):
-    # Read in parking data
-    data = ''
-    with open('parking-data.json', 'r') as f:
-        for line in f.readlines():
-            data += line
+    """
+    Modifies data in Cosmos Database.
+    :param name: The name of the person being added into the database
+    :param slot_num: The slot number
+    :param days: Array of 0 and 1s corresponding to the days the user selected
+    :param repeat: Integer representing how long the selection should be repeated for
+    :param curr_week: Index of current week to insert in
+    """
+    container = get_cosmos_connectivities()
 
-    # Locate slot data in overall JSON
-    data = json.loads(data)['slots']
-    index = -1
-    for i, arr in enumerate(data):
-        if arr['slot_num'] == slot_num:
-            index = i
-            break
+    # Query slots using SQL
+    query = f"SELECT * FROM c WHERE c.id='{slot_num}'"
 
-    # Add in new data
-    for i, e in enumerate(days):
-        if e == 1:
-            data[index]['availability'][curr_week][i] = name
-            data[index]['recurring'][curr_week][i] = repeat
+    items = list(container.query_items(
+        query=query,
+        enable_cross_partition_query=True
+    ))
+    item = items[0]
 
-    # Write new data to file
+    container.replace_item(item=item, body=item)
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage]) -> str:
 
     name, slot_num, days, repeat, curr_week = get_params(req)
-    with open('temp.txt', 'w') as f:
-        f.write(f'name={name}\nslot_num={slot_num}\ndays={days}\nrepeat={repeat}\ncurr_week={curr_week}')
 
     if name and slot_num and days and repeat and curr_week:
-        modify_data(name, slot_num, days)
-        return func.HttpResponse("This HTTP triggered function executed successfully." +
-                                 "name=" + name + "; slot_num=" + slot_num + "; days=" + days +
-                                 "; repeat=" + repeat)
+        modify_data(name, slot_num, days, repeat, curr_week)
+        return func.HttpResponse("This HTTP triggered function executed successfully.")
     else:
-        return func.HttpResponse(
-             "Invalid / missing parameter passed (name, slot_num, dates)",
-             status_code=500
-        )
+        response = f'Missing parameters: \nname = {name}\nslot_num = {slot_num}\ndays = {days}\n' + \
+                   f'repeat = {repeat}\ncurr_week = {curr_week}'
+        return func.HttpResponse(response, status_code=500)
