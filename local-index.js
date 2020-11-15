@@ -201,7 +201,7 @@ function cancel_booking() {
   document.getElementById('selected-slot').textContent = "Selected Slot: None";
   document.getElementById('selected-days').textContent = "Selected Days: None";
   document.getElementById('slot-location').textContent = "Slot Location: N/A";
-  document.getElementById('name-input').textContent = '';
+  document.getElementById('name-input').value = '';
   document.getElementById('repeat').checked = false;
   document.getElementById('repeat_limit').selectedIndex = 0;
 }
