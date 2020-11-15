@@ -20,7 +20,7 @@ async function load_data() {
    * Loads in initial data from Azure function
    * @type {Response}
    */
-  const response = await fetch('/api/GetData');
+  const response = await fetch('https://parking-spots-functions.azurewebsites.net/api/getdata?code=1dAtdPKMgT0kJQsDRGfYBO03HnQbzusgcLKvyDS2sdwvcpLRGqVltA==');
   parking_data = await response.json();
   parking_data = parking_data.slots;
 }
