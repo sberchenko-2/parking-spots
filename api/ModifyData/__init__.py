@@ -91,7 +91,7 @@ def process_inputs(name, slot_num, days, repeat, curr_week):
     return name, slot_num, days, repeat, curr_week
 
 
-def main(req: func.HttpRequest) -> str:
+def main(req: func.HttpRequest, msg: func.Out[func.QueueMessage]) -> str:
 
     name, slot_num, days, repeat, curr_week = get_params(req)
 
