@@ -36,7 +36,12 @@ async function load_data() {
    * @type {Response}
    */
   const response = await fetch('https://parking-spots-functions.azurewebsites.net/api/getdata?code=hG7yLab9UBWncPjbcyGj91uT4hg70SEbqpANJ6cJHxpUF7zzmtmjGw==');
+  console.log('optained response')
+  console.log(response)
   parking_data = await response.json();
+  console.log('obtained data')
+
+  console.log(parking_data)
 }
 
 function display_data() {
