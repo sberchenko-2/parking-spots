@@ -13,7 +13,11 @@ async function main() {
    */
   // Set initial date
   let today = new Date();
-  today.setDate(today.getDate() - today.getDay());
+  let day = today.getDay() - 1;
+  if (day === -1) {
+    day = 6;
+  }
+  today.setDate(today.getDate() - day);
 
   let di = String(today.getDate()).padStart(2, '0'),
       mi = String(today.getMonth() + 1).padStart(2, '0');
