@@ -81,6 +81,7 @@ function display_data() {
     row.insertCell(0).innerHTML = "Slot " + slot_num;
 
     for (let i = 0; i < 5; i++) {
+      // Add cell
       let cell = row.insertCell(-1);
       cell.className = availability[i] !== "None" ? "unavailable-slot" : "available-slot";
       cell.id = slot_num + "_" + i;
@@ -89,6 +90,9 @@ function display_data() {
           cell_clicked(cell, slot_num, slot_location, i)
         };
       }
+
+      // Add tooltip
+      cell.innerHTML = cell.innerHTML + '<span class="CellComment">Booking for: ' + name + '</span>'
     }
   }
 }
