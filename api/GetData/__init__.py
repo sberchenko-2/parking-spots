@@ -30,4 +30,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         enable_cross_partition_query=True
     ))
 
-    return func.HttpResponse(json.dumps(items[0]))
+    return func.HttpResponse(json.dumps(items))
