@@ -204,6 +204,15 @@ async function confirm_booking() {
   await fetch(fetch_str);
   cancel_booking();
   await load_data();
+
+  // Reset availability settings
+  document.getElementById('location-selector').value = 'any'
+  document.getElementById('monday').checked = false
+  document.getElementById('tuesday').checked = false
+  document.getElementById('wednesday').checked = false
+  document.getElementById('thursday').checked = false
+  document.getElementById('friday').checked = false
+
   display_data();
 }
 
