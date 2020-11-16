@@ -22,7 +22,7 @@ async function main() {
   let di = String(today.getDate()).padStart(2, '0'),
       mi = String(today.getMonth() + 1).padStart(2, '0');
 
-  today.setDate(today.getDate() + 7);
+  today.setDate(today.getDate() + 5);
   let df = String(today.getDate()).padStart(2, '0'),
       mf = String(today.getMonth() + 1).padStart(2, '0');
 
