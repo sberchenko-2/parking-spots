@@ -59,8 +59,7 @@ function display_data() {
     let slot_data = parking_data[k],
         slot_num = slot_data.slot_num,
         slot_location = slot_data.location,
-        availability = slot_data.availability[curr_week],
-        name = slot_data.name;
+        availability = slot_data.availability[curr_week];
 
     // Check slot meets search parameters
     if (location !== "any" && location !== slot_location) {
@@ -92,7 +91,7 @@ function display_data() {
       }
 
       // Add tooltip
-      cell.innerHTML = cell.innerHTML + '<span class="CellComment">Booking for: ' + name + '</span>'
+      cell.innerHTML = cell.innerHTML + '<span class="CellComment">Booking for: ' + availability[i] + '</span>'
     }
   }
 }
