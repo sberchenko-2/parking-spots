@@ -35,7 +35,7 @@ async function load_data() {
    * Loads in initial data from Azure function
    * @type {Response}
    */
-  const response = await fetch('https://parking-spots-functions.azurewebsites.net/api/getdata?code=1dAtdPKMgT0kJQsDRGfYBO03HnQbzusgcLKvyDS2sdwvcpLRGqVltA==');
+  const response = await fetch('https://parking-spots-functions.azurewebsites.net/api/getdata?code=hG7yLab9UBWncPjbcyGj91uT4hg70SEbqpANJ6cJHxpUF7zzmtmjGw==');
   parking_data = await response.json();
 }
 
@@ -193,7 +193,7 @@ async function confirm_booking() {
     selections[4] = 1;
   }
 
-  let fetch_str = 'https://parking-spots-functions.azurewebsites.net/api/modifydata?code=MoFDbgXluYzoOWLiIUw7XyKZt0Fab4DsO6fj81NQb1Eq8zjG2z76ZA==' +
+  let fetch_str = 'https://parking-spots-functions.azurewebsites.net/api/modifydata?code=rZTaCkVFLBsJyaaXBWGuZ3Ae7Ia0YZF5O/UeLh1pvVajFBISe1lOKw==' +
     '&name=' + name + '&slot_num=' + slot + '&days=[' + selections +
     ']&repeat=' + repeat + "&curr_week=" + curr_week;
 
