@@ -56,11 +56,11 @@ function display_data() {
   required_days = required_days.reduce((out, bool, i) => bool ? out.concat(i) : out, [])
 
   for (let k = 0; k < parking_data.length; k++) {
-    let slot_data = parking_data[k];
-    let slot_num = slot_data.slot_num;
-    let slot_location = slot_data.location;
-    let availability = slot_data.availability[curr_week];
-    let recurring = slot_data.recurring[curr_week];
+    let slot_data = parking_data[k],
+        slot_num = slot_data.slot_num,
+        slot_location = slot_data.location,
+        availability = slot_data.availability[curr_week],
+        name = slot_data.name;
 
     // Check slot meets search parameters
     if (location !== "any" && location !== slot_location) {
