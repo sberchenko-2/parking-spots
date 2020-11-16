@@ -64,6 +64,8 @@ def modify_data(name, slot_num, days, repeat, curr_week):
     elif max_week > 3:
         max_week = 3
         repeat -= 3 - curr_week
+    elif repeat == 0:
+        max_week = curr_week
     else:
         repeat = 0
 
