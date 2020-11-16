@@ -12,8 +12,10 @@ async function main() {
    * Loads and displays initial state of parking
    */
   // Set initial date
-  let today = new Date(),
-      di = String(today.getDate()).padStart(2, '0'),
+  let today = new Date();
+  today.setDate(today.getDate() - today.getDay());
+
+  let di = String(today.getDate()).padStart(2, '0'),
       mi = String(today.getMonth() + 1).padStart(2, '0');
 
   today.setDate(today.getDate() + 7);
