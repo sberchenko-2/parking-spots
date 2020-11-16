@@ -28,21 +28,21 @@
       </div>
       <div id="selectors">
         <label for="location-selector" style="font-size: 16pt">Location: </label>
-        <select id="location-selector" onchange="display_data()">
+        <select id="location-selector" onchange="cancel_booking(); display_data()">
           <option value="any">Any</option>
           <option value="underground">Underground</option>
           <option value="aboveground">Above Ground</option>
         </select>
         <label style="font-size: 16pt">Availability:</label>
-        <input type="checkbox" id="monday" value="monday" onchange="display_data()">
+        <input type="checkbox" id="monday" value="monday" onchange="cancel_booking(); display_data()">
         <label for="monday">M</label>
-        <input type="checkbox" id="tuesday" value="tuesday" onchange="display_data()">
+        <input type="checkbox" id="tuesday" value="tuesday" onchange="cancel_booking(); display_data()">
         <label for="tuesday">Tu</label>
-        <input type="checkbox" id="wednesday" value="wednesday" onchange="display_data()">
+        <input type="checkbox" id="wednesday" value="wednesday" onchange="cancel_booking(); display_data()">
         <label for="wednesday">W</label>
-        <input type="checkbox" id="thursday" value="thursday" onchange="display_data()">
+        <input type="checkbox" id="thursday" value="thursday" onchange="cancel_booking(); display_data()">
         <label for="thursday">Th</label>
-        <input type="checkbox" id="friday" value="friday" onchange="display_data()">
+        <input type="checkbox" id="friday" value="friday" onchange="cancel_booking(); display_data()">
         <label for="friday">F</label>
       </div>
     </div>
